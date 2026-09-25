@@ -21,7 +21,7 @@ jobs:
       contents: write
 
     steps:
-      - uses: CodyCBakerPhD/historia-action@v2
+      - uses: CodyCBakerPhD/historia-action@v3
         with:
           username: CodyCBakerPhD
           project-url: https://github.com/users/CodyCBakerPhD/projects/1
@@ -83,7 +83,7 @@ The composite is built from three narrower actions, each wrapping one command. U
 | `project-update-dates` | `historia project update dates` |
 
 ```yaml
-- uses: CodyCBakerPhD/historia-action/update-github@v2
+- uses: CodyCBakerPhD/historia-action/update-github@v3
   with:
     directory: history
     username: CodyCBakerPhD
@@ -96,7 +96,7 @@ The composite is built from three narrower actions, each wrapping one command. U
 Populating already sets the dates on each item it adds, so a scheduled update does not need this to keep new items right. What it catches is items whose dates moved after they were added, mostly ones closed since. That is worth its own step rather than a place in the composite:
 
 ```yaml
-- uses: CodyCBakerPhD/historia-action/project-update-dates@v2
+- uses: CodyCBakerPhD/historia-action/project-update-dates@v3
   with:
     url: https://github.com/users/CodyCBakerPhD/projects/1
     recency: "7"
@@ -115,6 +115,6 @@ Populating already sets the dates on each item it adds, so a scheduled update do
 A full pass over every item is a different job. It is what a first run needs, or a board whose items predate the date fields, and it is deliberate enough to run by hand:
 
 ```bash
-docker run --rm -e GITHUB_TOKEN ghcr.io/codycbakerphd/historia:0.11.1 \
+docker run --rm -e GITHUB_TOKEN ghcr.io/codycbakerphd/historia:0.11.2 \
   project update dates --url https://github.com/users/CodyCBakerPhD/projects/1
 ```
